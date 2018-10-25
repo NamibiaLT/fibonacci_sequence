@@ -3,10 +3,8 @@ class Fibonacci
   def self.fibonacci_generator(max)
 
     fib_arr = [1,2]
-    current_seq = fib_arr[-2] + fib_arr[-1]
-    while current_seq < max
-      fib_arr << current_seq
-      current_seq = fib_arr[-2] + fib_arr[-1]
+    while fib_arr.last(2).sum < max
+      fib_arr << fib_arr.last(2).sum
     end
     fib_arr
 
