@@ -1,16 +1,25 @@
+require 'pry'
 class Fibonacci
   def self.fibonacci_generator(max)
-    (1..max).inject([1,2]) { |fib_array| fib_array << fib_array.last(2).inject(:+) }
 
-    # (1..max).inject([1,2]) do |fib_array|
-    #   fib_array << fib_array.last(2).inject(:+)
-    #   break if fib_array.last == max
-    # end
-    # ------------------ #
-    # inject the first two numbers of your fib seq in an array
-    # then pass a block and inject
-    # the sum of the last two numbers in your seq
-    # until you hit the max number
+    fib_arr = [1,2]
+    current_seq = fib_arr[-2] + fib_arr[-1]
+    while current_seq <= max
+      fib_arr << current_seq
+      current_seq = fib_arr[-2] + fib_arr[-1]
+    end
+    fib_arr
 
+    # The below solution is great if you're calculating fibonacci to a  "max" position
+    # new_arr = (1..max).inject([1,2]) { |fib_array| fib_array << fib_array.last(2).sum }
+  end
+
+  def self.even_sum(max)
+    find_evens = Fibonacci.fibonacci_generator(max).select(&:even?)
+    if find_evens.include?(max)
+      find_evens.sum - find_evens.pop
+    else
+      find_evens.sum
+    end
   end
 end
