@@ -4,7 +4,7 @@ class Fibonacci
 
     fib_arr = [1,2]
     current_seq = fib_arr[-2] + fib_arr[-1]
-    while current_seq <= max
+    while current_seq < max
       fib_arr << current_seq
       current_seq = fib_arr[-2] + fib_arr[-1]
     end
@@ -16,10 +16,6 @@ class Fibonacci
 
   def self.even_sum(max)
     find_evens = Fibonacci.fibonacci_generator(max).select(&:even?)
-    if find_evens.include?(max)
-      find_evens.sum - find_evens.pop
-    else
-      find_evens.sum
-    end
+    find_evens.sum
   end
 end
